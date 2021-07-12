@@ -119,6 +119,49 @@ type Workout = {
   creator: UserID;
 };
 
+// ActionWorkout is a working alternative to the above type. It is basically a collection of Actions associated with a user.
+type ActionWorkout = {
+  actions: Action[];
+  creator: UserID;
+};
+
+// An Action represents a unique type of activity within a workout.
+interface Action {
+  id: string;
+};
+
+// An ActionGroup represents an embeddable collection of actions. For what use, who knows. Is this legal in TS?
+interface ActionGroup {
+  actions: Action[];
+};
+
+// ActionAnaerobic represents anaerobic exercises, such as bench press, deadlifts, curls, and similar.
+interface ActionAnaerobic {
+  exercise: Exercise;
+  repetitions: number;
+  weight: number;
+};
+
+// ActionAerobic represents aerobic exercises, such as jogging, rowing, walking, and similar.
+interface ActionAerobic {
+  exercise: Exercise;
+  distance: number;
+  duration: number;
+  repetitions: number;
+};
+
+// ActionFlexibility represents actions such as stretching.
+interface ActionFlexibility {
+  exercise: Exercise;
+  repetition: number;
+  duration: number;
+};
+
+// ActionRest simply represents an amount of rest time. These are placed between other actions so as to provide rest periods.
+interface ActionRest {
+  duration: number;
+};
+
 // Depending on how we store data,
 // we might want separate listing docs that contain
 // whole lists of groups and users
