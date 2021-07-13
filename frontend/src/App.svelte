@@ -1,4 +1,5 @@
 <script lang="ts">
+	import 'ress/ress.css'
 	import { v4 as uuidv4 } from 'uuid'
 	import Workout from './components/Workout.svelte'
 	import User from './models/User'
