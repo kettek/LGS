@@ -3,29 +3,51 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
-type ActionAerobic {
+interface Action implements UniqueID {
+  actionType: ActionType!
+  exercise: String!
+  id: ID!
+}
+
+type ActionAerobic implements Action & UniqueID {
   actionType: ActionType!
   distance: Float
   duration: Float
+  exercise: String!
+  id: ID!
   repetitions: Int
   weight: Float
 }
 
-type ActionAnaerobic {
+type ActionAnaerobic implements Action & UniqueID {
   actionType: ActionType!
+  exercise: String!
+  id: ID!
   repetitions: Int
   weight: Float
 }
 
-type ActionFlexibility {
-  actionType: ActionType!
-  repetitions: Int
-  weight: Float
-}
-
-type ActionRest {
+type ActionEat implements Action & UniqueID {
   actionType: ActionType!
   duration: Float
+  exercise: String!
+  food: String!
+  id: ID!
+}
+
+type ActionFlexibility implements Action & UniqueID {
+  actionType: ActionType!
+  exercise: String!
+  id: ID!
+  repetitions: Int
+  weight: Float
+}
+
+type ActionRest implements Action & UniqueID {
+  actionType: ActionType!
+  duration: Float
+  exercise: String!
+  id: ID!
 }
 
 """The type of action performed."""
@@ -37,8 +59,12 @@ enum ActionType {
   REST
 }
 
-union Actions = ActionAerobic | ActionAnaerobic | ActionFlexibility | ActionRest
+union Actions = ActionAerobic | ActionAnaerobic | ActionEat | ActionFlexibility | ActionRest
 
 type Query {
   actions: [Actions!]!
+}
+
+interface UniqueID {
+  id: ID!
 }

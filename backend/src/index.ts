@@ -1,7 +1,7 @@
 import { ApolloServer } from "apollo-server";
+import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
 import { buildSchema } from 'type-graphql';
 import ActionResolver from "./mock/resolvers/actions";
-import { printSchema } from 'graphql';
 
 const PORT = process.env.PORT || 4000;
 
@@ -15,6 +15,9 @@ async function bootstrap() {
   const server = new ApolloServer({
     schema,
     introspection: true,
+    plugins: [
+      ApolloServerPluginLandingPageGraphQLPlayground,
+    ]
   });
 
   // Start the server

@@ -3,9 +3,9 @@ import { ObjectType, Field, Int, Float, createUnionType } from "type-graphql";
 
 import { ActionType } from "../enums/actionType";
 import Action from "../interfaces/Action";
+import UniqueID from "../interfaces/UniqueID";
 
-
-@ObjectType()
+@ObjectType({ implements: [UniqueID, Action] })
 class ActionAerobic extends Action {
   @Field(type => ActionType)
   actionType: ActionType = ActionType.AEROBIC
@@ -23,7 +23,7 @@ class ActionAerobic extends Action {
   weight?: number        // Weight for things like weighted jogging
 }
 
-@ObjectType()
+@ObjectType({ implements: [UniqueID, Action] })
 class ActionAnaerobic extends Action {
   @Field(type => ActionType)
   actionType: ActionType = ActionType.ANAEROBIC
@@ -35,7 +35,7 @@ class ActionAnaerobic extends Action {
   weight?: number
 }
 
-@ObjectType()
+@ObjectType({ implements: [UniqueID, Action] })
 class ActionFlexibility extends Action {
   @Field(type => ActionType)
   actionType: ActionType = ActionType.FLEXIBILITY
@@ -47,7 +47,7 @@ class ActionFlexibility extends Action {
   weight?: number
 }
 
-@ObjectType()
+@ObjectType({ implements: [UniqueID, Action] })
 class ActionRest extends Action {
   @Field(type => ActionType)
   actionType: ActionType = ActionType.REST
@@ -56,7 +56,7 @@ class ActionRest extends Action {
   duration?: number      // Duration, such as time taken for a lap... err... nap.
 }
 
-@ObjectType()
+@ObjectType({ implements: [UniqueID, Action] })
 class ActionEat extends Action {
   @Field(type => ActionType)
   actionType: ActionType = ActionType.EAT
@@ -70,7 +70,7 @@ class ActionEat extends Action {
 
 const ActionUnion = createUnionType({
   name: "Actions", // the name of the GraphQL union
-  types: () => [ActionAerobic, ActionAnaerobic, ActionFlexibility, ActionRest] as const, // function that returns tuple of object types classes
+  types: () => [ActionAerobic, ActionAnaerobic, ActionFlexibility, ActionRest, ActionEat] as const, // function that returns tuple of object types classes
   resolveType: value => {
     switch (value.actionType){
       case ActionType.AEROBIC:     return ActionAerobic;

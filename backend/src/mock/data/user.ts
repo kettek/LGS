@@ -54,7 +54,7 @@ export let user = new User([
 				{
 					id: uuidv4(),
 					actionType: ActionType.EAT,
-          exercise: "eatin oats"
+          exercise: "eatin scroats"
 				},
 			]
 		}

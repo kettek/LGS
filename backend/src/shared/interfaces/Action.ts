@@ -1,10 +1,10 @@
 import { Field, InterfaceType } from "type-graphql";
 
 import { ActionType } from "../enums/actionType";
-import ID from "./ID";
+import UniqueID from "./UniqueID";
 
-@InterfaceType()
-export default abstract class Action extends ID {
+@InterfaceType({ implements: UniqueID })
+export default abstract class Action extends UniqueID {
   @Field(type => ActionType)
   actionType?: ActionType;
 
